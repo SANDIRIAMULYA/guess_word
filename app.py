@@ -169,7 +169,7 @@ def player_login():
     return render_template("player_login.html")
 
 
-@app.route("/logout")
+@app.route("/logout", methods=["POST"])
 @login_required
 def logout():
     logout_user()
@@ -268,7 +268,11 @@ def view_game(game_id):
                 colors.append("grey")
         display.append({"word": g.guess_word, "colors": colors, "attempt": g.attempt_number})
 
+    # In app.py
+    for row in display:
+        row['zipped'] = list(zip(row['word'], row['colors']))  # Use dictionary keys
     return render_template("game.html", game=game, display=display)
+
 
 # Admin dashboard
 @app.route("/admin")

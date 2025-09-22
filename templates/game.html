@@ -1,45 +1,41 @@
 {% extends "base.html" %}
 {% block title %}Game{% endblock %}
 {% block content %}
-  <h2>Guess Game</h2>
-  <p>Enter an uppercase 5-letter word. You have up to 5 guesses per game.</p>
+<h2>Guess Game</h2>
+<p>Enter an uppercase 5-letter word. You have up to 5 guesses per game.</p>
 
-  {% if game.status %}
-    <div class="alert alert-info">
-      Game finished — <strong>{{ game.status }}</strong>. Word: <strong>{{ game.chosen_word }}</strong>
-    </div>
-    <a class="btn btn-primary" href="{{ url_for('player_dashboard') }}">Back to Dashboard</a>
-  {% else %}
-    <form method="post" class="mb-3">
-      <input type="text" name="guess" maxlength="5" class="form-control text-uppercase" placeholder="GUESS" required>
-      <button class="btn btn-primary mt-2">Submit Guess</button>
-    </form>
-  {% endif %}
-
-  <h5>Previous guesses</h5>
-  {% if display %}
-    {% for row in display %}
-      <div class="d-flex mb-1">
-        {% for ch, color in row.colors|zip(row.word) %}
-          {% for ch, color in row.word|zip(row.colors) %}
-  {% if color == 'green' %}
-    {% set bg = '#198754' %}
-  {% elif color == 'orange' %}
-    {% set bg = '#f59e0b' %}
-  {% else %}
-    {% set bg = '#6c757d' %}
-  {% endif %}
-  <div class="p-2 text-center text-white me-1"
-       style="width:46px; height:46px; line-height:46px; border-radius:4px;">
-    {{ ch }}
+{% if game.status %}
+  <div class="alert alert-info">
+    Game finished — <strong>{{ game.status }}</strong>. Word: <strong>{{ game.chosen_word }}</strong>
   </div>
-{% endfor %}
+  <a class="btn btn-primary" href="{{ url_for('player_dashboard') }}">Back to Dashboard</a>
+{% else %}
+  <form method="post" class="mb-3">
+    <input type="text" name="guess" maxlength="5" class="form-control text-uppercase" placeholder="GUESS" required>
+    <button class="btn btn-primary mt-2">Submit Guess</button>
+  </form>
+{% endif %}
 
-        {% endfor %}
-        <div class="ms-3 align-self-center">Attempt {{ row.attempt }}</div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p class="text-muted">No guesses yet.</p>
-  {% endif %}
+<h5>Previous guesses</h5>
+{% if display %}
+  {% for row in display %}
+    <div class="d-flex mb-1">
+      {% for ch, color in row.zipped %}
+        {% if color == 'green' %}
+          {% set bg = '#198754' %}
+        {% elif color == 'orange' %}
+          {% set bg = '#f59e0b' %}
+        {% else %}
+          {% set bg = '#6c757d' %}
+        {% endif %}
+        <div class="p-2 text-center text-white me-1"
+             style="width:46px; height:46px; line-height:46px; border-radius:4px; background-color: {{ bg }};">
+          {{ ch }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="text-muted">No guesses yet.</p>
+{% endif %}
 {% endblock %}

@@ -19,7 +19,6 @@
       {% for g in recent_games %}
         <li class="list-group-item">
           {{ g.date }} — Word: {{ '*'*5 }} — Attempts: {{ g.attempts }} — Result: {{ g.status or 'In progress' }}
-          <a class="btn btn-sm btn-outline-primary float-end" href="{{ url_for('view_game', game_id=g.id) }}">Open</a>
         </li>
       {% endfor %}
     </ul>
