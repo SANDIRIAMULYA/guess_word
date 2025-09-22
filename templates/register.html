@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4">
+      <h3>Create account</h3>
+      <form method="post" action="{{ url_for('register') }}">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" name="username" required>
+          <div class="form-text">Enter a valid email address.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" minlength="5" pattern="^\S+$" required>
+          <!-- <div class="form-text">At least 5 characters, must not contain spaces, and include letters, numbers, and one of: $ % * @</div> -->
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Role</label>
+          <select class="form-select" name="role">
+            <option value="PLAYER">Player</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+        </div>
+        <button class="btn btn-success w-100">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

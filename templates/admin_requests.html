@@ -1,0 +1,19 @@
+<div class="card p-4">
+  <h3>Pending Admin Requests</h3>
+  <table class="table">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Action</th></tr></thead>
+    <tbody>
+      {% for req in requests %}
+      <tr>
+        <td>{{ req.full_name }}</td>
+        <td>{{ req.email }}</td>
+        <td>
+          <a href="{{ url_for('approve_request', req_id=req.id) }}" class="btn btn-sm btn-success">Approve</a>
+          <a href="{{ url_for('reject_request', req_id=req.id) }}" class="btn btn-sm btn-danger">Reject</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

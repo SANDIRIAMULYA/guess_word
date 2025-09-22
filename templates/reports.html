@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+  <h2>Reports</h2>
+
+  <h4>Summary - Games per day (recent)</h4>
+  <ul>
+    {% for d,c in games_per_day %}
+      <li>{{ d }} : {{ c }}</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Wins & Losses</h4>
+  <ul>
+    {% for status, c in wins_losses %}
+      <li>{{ status or 'IN PROGRESS' }} : {{ c }}</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Most guessed words</h4>
+  <ol>
+    {% for w,c in most_guessed %}
+      <li>{{ w }} — {{ c }}</li>
+    {% endfor %}
+  </ol>
+
+  {% if daily_report %}
+    <hr>
+    <h4>Daily report for {{ daily_report.date }}</h4>
+    <p>Users played: <strong>{{ daily_report.users_played }}</strong></p>
+    <p>Correct guesses (wins): <strong>{{ daily_report.wins }}</strong></p>
+  {% endif %}
+
+  {% if user_report %}
+    <hr>
+    <h4>User report for {{ user_report.user.username }}</h4>
+    {% if user_report.rows %}
+      <table class="table">
+        <thead><tr><th>Date</th><th>Games tried</th><th>Correct guesses</th></tr></thead>
+        <tbody>
+          {% for row in user_report.rows %}
+            <tr>
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ row[2] or 0 }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-muted">No games for this user yet.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
