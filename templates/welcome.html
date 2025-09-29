@@ -2,16 +2,23 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-  <div class="row align-items-center">
-    <div class="col-md-6">
-      <h1>Welcome to <span class="text-primary">Guess Word</span></h1>
-      <p class="lead">Login as Player to play or as Admin to manage words and run reports.</p>
-      <a href="{{ url_for('admin_login') }}">Admin Login</a>
-<a href="{{ url_for('player_login') }}">Player Login</a>
-      <!-- <a class="btn btn-outline-secondary" href="{{ url_for('register') }}">Register</a> -->
+<div class="row align-items-center justify-content-center">
+  <div class="col-md-8 text-center my-5">
+    <h1>Welcome to <span class="text-primary fw-bold">Guess Word</span></h1>
+    <p class="lead text-muted mt-3 mb-4">Login as a Player to play or as an Admin to manage words and run reports.</p>
+    
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+      <a class="btn btn-outline-primary btn-lg px-4 me-sm-3" href="{{ url_for('player_login') }}">Player Login</a>
+      <a class="btn btn-outline-secondary btn-lg px-4" href="{{ url_for('admin_login') }}">Admin Login</a>
     </div>
-    <div class="col-md-6 text-center">
-      <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="game" class="img-fluid" style="max-height:280px;">
-    </div>
+
+    <p class="mt-4">
+      Don't have an account? <a href="{{ url_for('register') }}" class="text-decoration-none">Register now!</a>
+    </p>
+
+    <!-- <div class="mt-5">
+      <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="game" class="img-fluid" style="max-height: 280px;">
+    </div> -->
   </div>
+</div>
 {% endblock %}

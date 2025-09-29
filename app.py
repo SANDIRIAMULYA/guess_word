@@ -305,7 +305,12 @@ def admin_add_word():
         db.session.add(Word(word=w))
         db.session.commit()
         flash("Word added.", "success")
-    return redirect(url_for("admin_dashboard"))
+    return redirect(url_for("admin_words.html"))
+@app.route("/admin/words")
+@login_required
+def admin_words():
+    words = Word.query.all()
+    return render_template("admin_words.html", words=words)
 
 @app.route("/admin/remove_word/<int:word_id>", methods=["POST"])
 @login_required
@@ -317,7 +322,7 @@ def admin_remove_word(word_id):
         db.session.delete(w)
         db.session.commit()
         flash("Word removed.", "info")
-    return redirect(url_for("admin_dashboard"))
+    return redirect(url_for("admin_words"))
 
 # -------- Admin-request (submit) --------
 @app.route("/request-admin", methods=["GET", "POST"])
