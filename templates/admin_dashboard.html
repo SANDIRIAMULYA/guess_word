@@ -35,8 +35,8 @@
                 <div class="card-body d-flex flex-column">
                     <p class="card-text text-muted">Add new words or manage the existing list of playable words for the game.</p>
                     <form class="d-flex mt-auto" method="post" action="{{ url_for('admin_add_word') }}">
-                        <input class="form-control text-uppercase me-2" name="word" maxlength="5" placeholder="NEW WORD (5 letters)">
-                        <button class="btn btn-success">Add</button>
+                        <!-- <input class="form-control text-uppercase me-2" name="word" maxlength="5" placeholder="NEW WORD (5 letters)"> -->
+                        <!-- <button class="btn btn-success">Add</button> -->
                     </form>
                     <div class="mt-3 text-center">
                          <a class="btn btn-outline-dark" href="{{ url_for('admin_words') }}">
